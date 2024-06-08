@@ -1,6 +1,9 @@
 # Testing files
 *.bmp
 
+# VSCODE
+.vscode
+
 # Prerequisites
 *.d
 
