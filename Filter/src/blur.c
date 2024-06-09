@@ -1,7 +1,7 @@
 #include <math.h>
 
-#include "../include/filter.h"
 #include "../include/blur.h"
+#include "../include/filter.h"
 
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
@@ -18,8 +18,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            RGBTRIPLE weights[9];
-            int n = populate_weights(i, j, height, width, copy, weights);
+            RGBTRIPLE weights[WEIGHT_SIZE];
+            int n;
+            populate_weights(&n, i, j, height, width, copy, weights);
             blur_pixel(&image[i][j], weights, n);
         }
     }
@@ -33,29 +34,29 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
     blue = green = red = 0;
     for (int i = 0; i < size; i++)
     {
-        blue   +=  pixels[i].rgbtBlue;
-        green  +=  pixels[i].rgbtGreen;
-        red    +=  pixels[i].rgbtRed;
+        blue  += pixels[i].rgbtBlue;
+        green += pixels[i].rgbtGreen;
+        red   += pixels[i].rgbtRed;
     }
 
-    blue   =  round(blue  / (float) size);
-    green  =  round(green / (float) size);
-    red    =  round(red   / (float) size);
+    blue  = round(blue  / (float) size);
+    green = round(green / (float) size);
+    red   = round(red   / (float) size);
 
-    pixel->rgbtBlue   =  blue;
-    pixel->rgbtGreen  =  green;
-    pixel->rgbtRed    =  red;
+    pixel->rgbtBlue  = blue;
+    pixel->rgbtGreen = green;
+    pixel->rgbtRed   = red;
 
     return;
 }
 
-static int populate_weights(int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[9])
+static void populate_weights(int *n, int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE])
 {
     int di[] = {-1, -1, -1,  0,  0,  0,  1,  1,  1};
     int dj[] = {-1,  0,  1, -1,  0,  1, -1,  0,  1};
 
     int k = 0;
-    int n = 0;
+    int counter = 0;
     for (int d = 0; d < 9; d++)
     {
         int ni = i + di[d];
@@ -65,9 +66,11 @@ static int populate_weights(int i, int j, int height, int width, RGBTRIPLE copy[
         {
             weights[k] = copy[ni][nj];
             k++;
-            n++;
+            counter++;
         }
     }
 
-    return n;
+    *n = counter;
+
+    return;
 }

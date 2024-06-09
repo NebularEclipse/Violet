@@ -10,7 +10,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
             swap_pixels(&image[i][j], &image[i][width - j - 1]);
         }
     }
-    
+
     return;
 }
 

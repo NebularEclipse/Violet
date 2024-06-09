@@ -16,11 +16,11 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 
 static void grayscale_pixel(RGBTRIPLE *pixel)
 {
-    BYTE mean = (pixel->rgbtBlue + pixel->rgbtGreen + pixel->rgbtRed + 1.5) / 3;
+    BYTE mean = (1.5 + pixel->rgbtBlue + pixel->rgbtGreen + pixel->rgbtRed) / 3;
 
-    pixel->rgbtBlue   =  mean;
-    pixel->rgbtGreen  =  mean;
-    pixel->rgbtRed    =  mean;
-    
+    pixel->rgbtBlue  = mean;
+    pixel->rgbtGreen = mean;
+    pixel->rgbtRed   = mean;
+
     return;
 }
