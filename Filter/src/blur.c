@@ -19,8 +19,8 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             RGBTRIPLE weights[9];
-            populate_weights(i, j, height, width, copy, weights);
-            blur_pixel(&image[i][j], weights, neighbors(i, j, height, width));
+            int n = populate_weights(i, j, height, width, copy, weights);
+            blur_pixel(&image[i][j], weights, n);
         }
     }
 
@@ -38,9 +38,9 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
         red    +=  pixels[i].rgbtRed;
     }
 
-    blue   =  round(blue / (float) size);
+    blue   =  round(blue  / (float) size);
     green  =  round(green / (float) size);
-    red    =  round(red / (float) size);
+    red    =  round(red   / (float) size);
 
     pixel->rgbtBlue   =  blue;
     pixel->rgbtGreen  =  green;
@@ -49,12 +49,13 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
     return;
 }
 
-static void populate_weights(int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[9])
+static int populate_weights(int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[9])
 {
     int di[] = {-1, -1, -1,  0,  0,  0,  1,  1,  1};
     int dj[] = {-1,  0,  1, -1,  0,  1, -1,  0,  1};
 
     int k = 0;
+    int n = 0;
     for (int d = 0; d < 9; d++)
     {
         int ni = i + di[d];
@@ -64,29 +65,9 @@ static void populate_weights(int i, int j, int height, int width, RGBTRIPLE copy
         {
             weights[k] = copy[ni][nj];
             k++;
+            n++;
         }
     }
 
-    return;
-}
-
-static int neighbors(int i, int j, int height, int width)
-{
-    int count = 0;
-
-    int di[] = {-1, -1, -1,  0,  0,  0,  1,  1,  1};
-    int dj[] = {-1,  0,  1, -1,  0,  1, -1,  0,  1};
-
-    for (int d = 0; d < 9; d++)
-    {
-        int ni = i + di[d];
-        int nj = j + dj[d];
-
-        if (ni >= 0 && ni < height && nj >= 0 && nj < width)
-        {
-            count++;
-        }
-    }
-
-    return count;
+    return n;
 }
