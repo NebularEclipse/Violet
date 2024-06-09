@@ -19,9 +19,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             RGBTRIPLE weights[WEIGHT_SIZE];
-            int n;
-            populate_weights(&n, i, j, height, width, copy, weights);
-            blur_pixel(&image[i][j], weights, n);
+            size_t size;
+            populate_weights(&size, i, j, height, width, copy, weights);
+            blur_pixel(&image[i][j], weights, size);
         }
     }
 
@@ -50,7 +50,7 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
     return;
 }
 
-static void populate_weights(int *n, int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE])
+static void populate_weights(size_t *size, int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE])
 {
     int di[] = {-1, -1, -1,  0,  0,  0,  1,  1,  1};
     int dj[] = {-1,  0,  1, -1,  0,  1, -1,  0,  1};
@@ -70,7 +70,7 @@ static void populate_weights(int *n, int i, int j, int height, int width, RGBTRI
         }
     }
 
-    *n = counter;
+    *size = counter;
 
     return;
 }

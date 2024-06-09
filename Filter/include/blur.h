@@ -26,7 +26,6 @@
  * RGBTRIPLE pixel;
  * RGBTRIPLE weights[9];
  * size_t size = 9;
- * // Initialize pixel and weights data...
  * blur_pixel(&pixel, weights, size);
  * ```
  */
@@ -37,7 +36,7 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *weights, size_t size);
  *
  * This function populates weights for blurring calculations based on the position in the image.
  *
- * @param n A pointer to a counter outside function call.
+ * @param size A pointer to a counter outside function call.
  * @param i The row index of the pixel for which weights are being populated.
  * @param j The column index of the pixel for which weights are being populated.
  * @param height The height of the image.
@@ -62,6 +61,6 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *weights, size_t size);
  * populate_weights(i, j, height, width, copy, weights);
  * ```
  */
-static void populate_weights(int *n, int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE]);
+static void populate_weights(size_t *size, int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE]);
 
 #endif
