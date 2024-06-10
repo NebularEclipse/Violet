@@ -4,10 +4,12 @@
 
 #include "../include/filter.h"
 
+static void print_help(void);
+
 int main(int argc, char *argv[])
 {
     // Define allowable filters
-    char *filters = "bgrs";
+    char *filters = "beghrs";
 
     // Get filter flag and check validity
     char filter = getopt(argc, argv, filters);
@@ -15,6 +17,13 @@ int main(int argc, char *argv[])
     {
         printf("Invalid filter.\n");
         return 1;
+    }
+
+    // Check if filter is actually a help flag
+    if (filter == 'h')
+    {
+        print_help();
+        return 0;
     }
 
     // Ensure only one filter
@@ -105,6 +114,11 @@ int main(int argc, char *argv[])
             blur(height, width, image);
             break;
 
+        // Edges
+        case 'e':
+            edges(height, width, image);
+            break;
+
         // Grayscale
         case 'g':
             grayscale(height, width, image);
@@ -147,4 +161,17 @@ int main(int argc, char *argv[])
     fclose(inptr);
     fclose(outptr);
     return 0;
+}
+
+static void print_help(void)
+{
+    printf("Usage: ./filter [flag] infile outfile\n");
+    printf("Options:\n");
+    printf("  -b value   Apply a Box Blur filter of radius 1.\n");
+    printf("  -e value   Apply Sobel Edge Detection filter.\n");
+    printf("  -g value   Apply Grayscale filter.\n");
+    printf("  -r value   Apply Horizontal Reflection filter.\n");
+    printf("  -s value   Apply Sepia filter.\n");
+    printf("  -h         Display this help message\n");
+    // Add more filters as needed
 }
