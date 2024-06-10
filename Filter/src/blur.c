@@ -32,6 +32,7 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
 {
     float blue, green, red;
     blue = green = red = 0;
+    
     for (int i = 0; i < size; i++)
     {
         blue  += pixels[i].rgbtBlue;
@@ -39,13 +40,9 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
         red   += pixels[i].rgbtRed;
     }
 
-    blue  = round(blue  / (float) size);
-    green = round(green / (float) size);
-    red   = round(red   / (float) size);
-
-    pixel->rgbtBlue  = blue;
-    pixel->rgbtGreen = green;
-    pixel->rgbtRed   = red;
+    pixel->rgbtBlue  = round(blue  / (float) size);
+    pixel->rgbtGreen = round(green / (float) size);
+    pixel->rgbtRed   = round(red   / (float) size);
 
     return;
 }
