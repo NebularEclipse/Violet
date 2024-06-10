@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stddef.h>
 
 #include "../include/blur.h"
 #include "../include/filter.h"

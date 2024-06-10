@@ -7,6 +7,8 @@
 #ifndef BLUR_H
 #define BLUR_H
 
+#include <stddef.h>
+
 #include "bmp.h"
 
 #define WEIGHT_SIZE 9
