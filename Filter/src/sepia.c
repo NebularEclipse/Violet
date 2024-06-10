@@ -16,13 +16,16 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 
 static void sepia_pixel(RGBTRIPLE *pixel)
 {
-    int sepia_blue  = 0.5 + (.272 * pixel->rgbtRed + .534 * pixel->rgbtGreen + .131 * pixel->rgbtBlue);
-    int sepia_green = 0.5 + (.349 * pixel->rgbtRed + .686 * pixel->rgbtGreen + .168 * pixel->rgbtBlue);
-    int sepia_red   = 0.5 + (.393 * pixel->rgbtRed + .769 * pixel->rgbtGreen + .189 * pixel->rgbtBlue);
+    int sepia_blue =
+        0.5 + (.272 * pixel->rgbtRed + .534 * pixel->rgbtGreen + .131 * pixel->rgbtBlue);
+    int sepia_green =
+        0.5 + (.349 * pixel->rgbtRed + .686 * pixel->rgbtGreen + .168 * pixel->rgbtBlue);
+    int sepia_red =
+        0.5 + (.393 * pixel->rgbtRed + .769 * pixel->rgbtGreen + .189 * pixel->rgbtBlue);
 
-    pixel->rgbtBlue  = threshold(sepia_blue);
+    pixel->rgbtBlue = threshold(sepia_blue);
     pixel->rgbtGreen = threshold(sepia_green);
-    pixel->rgbtRed   = threshold(sepia_red);
+    pixel->rgbtRed = threshold(sepia_red);
 
     return;
 }

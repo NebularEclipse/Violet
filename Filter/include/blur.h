@@ -1,3 +1,9 @@
+/**
+ * Author: Gian Carlo Bata
+ * Date: 2024-06-10
+ * Description: Header file for helper functions in blur.c
+ */
+
 #ifndef BLUR_H
 #define BLUR_H
 
@@ -8,17 +14,20 @@
 /**
  * @brief Applies a blurring effect to a pixel.
  *
- * This function applies a blurring effect to a pixel by averaging the color values of nearby pixels weighted by provided weights.
+ * This function applies a blurring effect to a pixel by averaging the color values of nearby pixels
+ * weighted by provided weights.
  *
  * @param pixel A pointer to the RGBTRIPLE structure representing the pixel to be blurred.
  *              Must point to a properly initialized RGBTRIPLE structure.
- * @param weights A pointer to the array of RGBTRIPLE structures representing the weights used for blurring calculations.
- *                Must point to a properly initialized array of RGBTRIPLE structures.
+ * @param weights A pointer to the array of RGBTRIPLE structures representing the weights used for
+ *                blurring calculations. Must point to a properly initialized array of RGBTRIPLE
+ *                structures.
  * @param size The size of the weights array.
  *
  * @note The function modifies the color values of the input pixel in place.
  *
- * @warning The size parameter must be the correct size of the weights array to avoid accessing out-of-bounds memory.
+ * @warning The size parameter must be the correct size of the weights array to avoid accessing
+ *          out-of-bounds memory.
  *
  * @example
  * Example usage of the function:
@@ -42,13 +51,15 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *weights, size_t size);
  * @param height The height of the image.
  * @param width The width of the image.
  * @param copy The copy of the image pixels.
- * @param weights An array of RGBTRIPLE structures representing the weights for blurring calculations.
+ * @param weights An array of RGBTRIPLE structures representing the weights for blurring
+ *                calculations.
  *
  * @return void
  *
  * @note The function populates weights in the weights array based on the surrounding pixels.
  *
- * @warning The function assumes that the copy and weights arrays are properly initialized and have sufficient memory.
+ * @warning The function assumes that the copy and weights arrays are properly initialized and have
+ *          sufficient memory.
  *
  * @example
  * Example usage of the function:
@@ -61,6 +72,7 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *weights, size_t size);
  * populate_weights(i, j, height, width, copy, weights);
  * ```
  */
-static void populate_weights(size_t *size, int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE]);
+static void populate_weights(size_t *size, int i, int j, int height, int width,
+                             RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE]);
 
 #endif

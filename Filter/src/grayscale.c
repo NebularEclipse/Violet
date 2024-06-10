@@ -18,9 +18,9 @@ static void grayscale_pixel(RGBTRIPLE *pixel)
 {
     BYTE mean = (1.5 + pixel->rgbtBlue + pixel->rgbtGreen + pixel->rgbtRed) / 3;
 
-    pixel->rgbtBlue  = mean;
+    pixel->rgbtBlue = mean;
     pixel->rgbtGreen = mean;
-    pixel->rgbtRed   = mean;
+    pixel->rgbtRed = mean;
 
     return;
 }

@@ -1,3 +1,9 @@
+/**
+ * Author: Gian Carlo Bata
+ * Date: 2024-06-10
+ * Description: Header file for helper functions in grayscale.c
+ */
+
 #ifndef GRAYSCALE_H
 #define GRAYSCALE_H
 
@@ -12,7 +18,8 @@
  * @param pixel A pointer to an RGBTRIPLE structure on which we want to apply the Grayscale filter.
  * @return void
  *
- * @note Ensure that the pixel pointer is valid and points to a properly initialized RGBTRIPLE structure.
+ * @note Ensure that the pixel pointer is valid and points to a properly initialized RGBTRIPLE
+ *       structure.
  *
  * @warning This function does not perform any bounds checking on the pixel pointer.
  *

@@ -1,3 +1,9 @@
+/**
+ * Author: Gian Carlo Bata
+ * Data: 2024-06-10
+ * Description: Header file for helper functions in reflect.c
+ */
+
 #ifndef REFLECT_H
 #define REFLECT_H
 
