@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 
     // Get filter flag and check validity
     char filter = getopt(argc, argv, filters);
+    printf("Getting operation flag.\n");
     if (filter == '?')
     {
         printf("Invalid filter.\n");
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
 
     // Open input file
     FILE *inptr = fopen(infile, "rb");
+    printf("Opening %s.\n", argv[optind]);
     if (inptr == NULL)
     {
         printf("Could not open %s.\n", infile);
@@ -54,6 +56,7 @@ int main(int argc, char *argv[])
 
     // Open output file
     FILE *outptr = fopen(outfile, "wb");
+    printf("Opening %s.\n", argv[optind + 1]);
     if (outptr == NULL)
     {
         fclose(inptr);
@@ -107,6 +110,7 @@ int main(int argc, char *argv[])
     }
 
     // Filter image
+    printf("Applying filter.\n");
     switch (filter)
     {
         // Blur
@@ -135,6 +139,8 @@ int main(int argc, char *argv[])
             break;
     }
 
+    printf("Writing %s\n", argv[optind + 1]);
+
     // Write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
 
@@ -157,6 +163,7 @@ int main(int argc, char *argv[])
     // Free memory for image
     free(image);
 
+    printf("Closing files %s and %s\n", argv[optind], argv[optind + 1]);
     // Close files
     fclose(inptr);
     fclose(outptr);
