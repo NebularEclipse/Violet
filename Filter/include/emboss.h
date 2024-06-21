@@ -1,7 +1,7 @@
 /**
  * Author: Gian Carlo Bata
  * Date: 2024-06-11
- * Description: Header file for helper functions in blur.c
+ * Description: Header file for helper functions in emboss.c
  */
 
 #ifndef EMBOSS_H
@@ -11,6 +11,8 @@
 
 static void emboss_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, RGBTRIPLE copy[height][width]);
 
-static BYTE threshold(float x);
+static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width]);
+
+static BYTE threshold(double x);
 
 #endif

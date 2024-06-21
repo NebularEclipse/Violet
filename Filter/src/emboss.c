@@ -8,14 +8,7 @@ void emboss(int height, int width, RGBTRIPLE image[height][width])
     grayscale(height, width, image);
 
     RGBTRIPLE copy[height][width];
-
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            copy[i][j] = image[i][j];
-        }
-    }
+    copy_image(height, width, image, copy);
 
     for (int i = 0; i < height; i++)
     {
@@ -26,6 +19,17 @@ void emboss(int height, int width, RGBTRIPLE image[height][width])
     }
 
     return;
+}
+
+static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width])
+{
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            copy[i][j] = image[i][j];
+        }
+    }
 }
 
 static void emboss_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, RGBTRIPLE copy[height][width])
@@ -54,7 +58,7 @@ static void emboss_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, 
     return;
 }
 
-static BYTE threshold(float x)
+static BYTE threshold(double x)
 {
     return fmax(0, fmin(255, x + 128));
 }

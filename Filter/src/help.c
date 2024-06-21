@@ -11,7 +11,8 @@ void print_help(void)
     printf("  -d value   Apply Directional Difference filter.\n");
     printf("  -g value   Apply Grayscale filter.\n");
     printf("  -r value   Apply Horizontal Reflection filter.\n");
-    printf("  -s value   Apply Sepia filter.\n");
+    printf("  -s value   Apply Sepia filter.\n\n");
     printf("  -h         Display this help message\n");
+    printf("Usage: ./filter -h\n");
     // Add more filters as needed
 }

@@ -1,3 +1,9 @@
+/**
+ * Author: Gian Carlo Bata
+ * Date: 2024-06-21
+ * Description: Header file for helper functions in options.c
+ */
+
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
