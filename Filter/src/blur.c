@@ -1,6 +1,7 @@
 #include <stddef.h>
 
 #include "../include/blur.h"
+#include "../include/copy_image.h"
 #include "../include/filter.h"
 
 void blur(int height, int width, RGBTRIPLE image[height][width])
@@ -41,17 +42,6 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
     pixel->rgbtRed = red / size;
 
     return;
-}
-
-static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width])
-{
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            copy[i][j] = image[i][j];
-        }
-    }
 }
 
 static void populate_weights(size_t *size, int i, int j, int height, int width,

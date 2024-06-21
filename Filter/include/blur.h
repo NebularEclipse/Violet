@@ -15,8 +15,6 @@
 
 static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *weights, size_t size);
 
-static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width]);
-
 static void populate_weights(size_t *size, int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE]);
 
 #endif

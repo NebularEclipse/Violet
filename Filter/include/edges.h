@@ -11,8 +11,6 @@
 
 static void edges_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, RGBTRIPLE copy[height][width]);
 
-static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width]);
-
 static BYTE threshold(double x);
 
 #endif
