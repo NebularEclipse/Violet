@@ -23,17 +23,6 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     return;
 }
 
-static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width])
-{
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            copy[i][j] = image[i][j];
-        }
-    }
-}
-
 static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
 {
     float blue, green, red;
@@ -52,6 +41,17 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
     pixel->rgbtRed = red / size;
 
     return;
+}
+
+static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width])
+{
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            copy[i][j] = image[i][j];
+        }
+    }
 }
 
 static void populate_weights(size_t *size, int i, int j, int height, int width,

@@ -19,17 +19,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     return;
 }
 
-static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width])
-{
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            copy[i][j] = image[i][j];
-        }
-    }
-}
-
 static void edges_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, RGBTRIPLE copy[height][width])
 {
     float x_blue, y_blue, x_green, y_green, x_red, y_red;
@@ -62,6 +51,17 @@ static void edges_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, R
     pixel->rgbtRed = threshold(sqrt(pow(x_red, 2) + pow(y_red, 2)));
 
     return;
+}
+
+static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width])
+{
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            copy[i][j] = image[i][j];
+        }
+    }
 }
 
 static BYTE threshold(double x)
