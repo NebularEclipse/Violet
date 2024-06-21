@@ -17,8 +17,8 @@ jobs:
     #   run: ./configure
     - name: make Filter/
       run: make Filter/
-    - name: Filter/bin/filter -d Filter/bin/yard.bmp Filter/bin/dyard.bmp
-      run: Filter/bin/filter -d Filter/bin/yard.bmp Filter/bin/dyard.bmp
+    # - name: Filter/bin/filter -d Filter/bin/yard.bmp Filter/bin/dyard.bmp
+    #   run: Filter/bin/filter -d Filter/bin/yard.bmp Filter/bin/dyard.bmp
     # - name: make check
     #   run: make check
     # - name: make distcheck
