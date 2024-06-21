@@ -15,8 +15,6 @@ jobs:
     - uses: actions/checkout@v4
     # - name: configure
     #   run: ./configure
-    - name: cd Filter
-      run: cd Filter
     - name: make
       run: make
     # - name: make check
