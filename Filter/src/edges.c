@@ -6,6 +6,8 @@
 
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
+    grayscale(height, width, image);
+    
     RGBTRIPLE copy[height][width];
     copy_image(height, width, image, copy);
 
