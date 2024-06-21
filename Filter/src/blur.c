@@ -1,4 +1,3 @@
-#include <math.h>
 #include <stddef.h>
 
 #include "../include/blur.h"
@@ -7,14 +6,7 @@
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
     RGBTRIPLE copy[height][width];
-
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            copy[i][j] = image[i][j];
-        }
-    }
+    copy_image(height, width, image, copy);
 
     for (int i = 0; i < height; i++)
     {
@@ -31,11 +23,22 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     return;
 }
 
+static void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width])
+{
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            copy[i][j] = image[i][j];
+        }
+    }
+}
+
 static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
 {
     float blue, green, red;
 
-    blue = green = red = 0;
+    blue = green = red = 0.5;
 
     for (int i = 0; i < size; i++)
     {
@@ -44,9 +47,9 @@ static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
         red += pixels[i].rgbtRed;
     }
 
-    pixel->rgbtBlue = round(blue / (float) size);
-    pixel->rgbtGreen = round(green / (float) size);
-    pixel->rgbtRed = round(red / (float) size);
+    pixel->rgbtBlue = blue / size;
+    pixel->rgbtGreen = green / size;
+    pixel->rgbtRed = red / size;
 
     return;
 }
@@ -60,7 +63,7 @@ static void populate_weights(size_t *size, int i, int j, int height, int width,
     int k = 0;
     int counter = 0;
 
-    for (int d = 0; d < 9; d++)
+    for (int d = 0; d < WEIGHT_SIZE; d++)
     {
         int ni = i + di[d];
         int nj = j + dj[d];

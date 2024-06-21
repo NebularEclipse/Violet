@@ -1,5 +1,4 @@
 #include "../include/filter.h"
-#include "../include/sepia.h"
 
 void sepia(int height, int width, RGBTRIPLE image[height][width])
 {
@@ -7,30 +6,18 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            sepia_pixel(&image[i][j]);
+            int sepia_blue =
+                0.5 + (.272 * image[i][j].rgbtRed + .534 * image[i][j].rgbtGreen + .131 * image[i][j].rgbtBlue);
+            int sepia_green =
+                0.5 + (.349 * image[i][j].rgbtRed + .686 * image[i][j].rgbtGreen + .168 * image[i][j].rgbtBlue);
+            int sepia_red =
+                0.5 + (.393 * image[i][j].rgbtRed + .769 * image[i][j].rgbtGreen + .189 * image[i][j].rgbtBlue);
+
+            image[i][j].rgbtBlue = (sepia_blue < 0) ? 0 : ((sepia_blue > 255) ? 255 : sepia_blue);
+            image[i][j].rgbtGreen = (sepia_green < 0) ? 0 : ((sepia_green > 255) ? 255 : sepia_green);
+            image[i][j].rgbtRed = (sepia_red < 0) ? 0 : ((sepia_red > 255) ? 255 : sepia_red);
         }
     }
     
     return;
-}
-
-static void sepia_pixel(RGBTRIPLE *pixel)
-{
-    int sepia_blue =
-        0.5 + (.272 * pixel->rgbtRed + .534 * pixel->rgbtGreen + .131 * pixel->rgbtBlue);
-    int sepia_green =
-        0.5 + (.349 * pixel->rgbtRed + .686 * pixel->rgbtGreen + .168 * pixel->rgbtBlue);
-    int sepia_red =
-        0.5 + (.393 * pixel->rgbtRed + .769 * pixel->rgbtGreen + .189 * pixel->rgbtBlue);
-
-    pixel->rgbtBlue = threshold(sepia_blue);
-    pixel->rgbtGreen = threshold(sepia_green);
-    pixel->rgbtRed = threshold(sepia_red);
-
-    return;
-}
-
-static BYTE threshold(int x)
-{
-    return (x < 0) ? 0 : ((x > 255) ? 255 : x);
 }

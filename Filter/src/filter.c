@@ -2,26 +2,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../include/filter.h"
-
-static void print_help(void);
+#include "../include/help.h"
+#include "../include/options.h"
 
 int main(int argc, char *argv[])
 {
     // Define allowable filters
-    char *filters = "beghrs";
+    char *filters = "bedghrs";
 
     // Get filter flag and check validity
-    char filter = getopt(argc, argv, filters);
+    char filter_opt = getopt(argc, argv, filters);
     printf("Getting operation flag.\n");
-    if (filter == '?')
+    if (filter_opt == '?')
     {
         printf("Invalid filter.\n");
         return 1;
     }
 
     // Check if filter is actually a help flag
-    if (filter == 'h')
+    if (filter_opt == 'h')
     {
         print_help();
         return 0;
@@ -111,33 +110,7 @@ int main(int argc, char *argv[])
 
     // Filter image
     printf("Applying filter.\n");
-    switch (filter)
-    {
-        // Blur
-        case 'b':
-            blur(height, width, image);
-            break;
-
-        // Edges
-        case 'e':
-            edges(height, width, image);
-            break;
-
-        // Grayscale
-        case 'g':
-            grayscale(height, width, image);
-            break;
-
-        // Reflection
-        case 'r':
-            reflect(height, width, image);
-            break;
-
-        // Sepia
-        case 's':
-            sepia(height, width, image);
-            break;
-    }
+    filter(height, width, image, filter_opt);
 
     printf("Writing %s\n", argv[optind + 1]);
 
@@ -168,17 +141,4 @@ int main(int argc, char *argv[])
     fclose(inptr);
     fclose(outptr);
     return 0;
-}
-
-static void print_help(void)
-{
-    printf("Usage: ./filter [flag] infile outfile\n");
-    printf("Options:\n");
-    printf("  -b value   Apply a Box Blur filter of radius 1.\n");
-    printf("  -e value   Apply Sobel Edge Detection filter.\n");
-    printf("  -g value   Apply Grayscale filter.\n");
-    printf("  -r value   Apply Horizontal Reflection filter.\n");
-    printf("  -s value   Apply Sepia filter.\n");
-    printf("  -h         Display this help message\n");
-    // Add more filters as needed
 }

@@ -1,5 +1,4 @@
 #include "../include/filter.h"
-#include "../include/grayscale.h"
 
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
@@ -7,20 +6,13 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            grayscale_pixel(&image[i][j]);
+            BYTE mean = (1.5 + image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed) / 3;
+
+            image[i][j].rgbtBlue = mean;
+            image[i][j].rgbtGreen = mean;
+            image[i][j].rgbtRed = mean;
         }
     }
     
-    return;
-}
-
-static void grayscale_pixel(RGBTRIPLE *pixel)
-{
-    BYTE mean = (1.5 + pixel->rgbtBlue + pixel->rgbtGreen + pixel->rgbtRed) / 3;
-
-    pixel->rgbtBlue = mean;
-    pixel->rgbtGreen = mean;
-    pixel->rgbtRed = mean;
-
     return;
 }
