@@ -9,6 +9,13 @@
 
 #include "bmp.h"
 
-void copy_image(int height, int width, RGBTRIPLE image[height][width], RGBTRIPLE copy[height][width]);
+void
+copy_image
+(
+    int height,
+    int width,
+    RGBTRIPLE image[height][width],
+    RGBTRIPLE copy[height][width]
+);
 
 #endif

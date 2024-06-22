@@ -9,6 +9,13 @@
 
 #include "bmp.h"
 
-void filter(int height, int width, RGBTRIPLE image[height][width], char opt);
+void
+filter
+(
+    int height,
+    int width,
+    RGBTRIPLE image[height][width],
+    char opt
+);
 
 #endif

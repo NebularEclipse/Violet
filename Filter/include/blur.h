@@ -11,10 +11,17 @@
 
 #include "bmp.h"
 
-#define WEIGHT_SIZE 9
+#define KERNEL_SIZE 9
 
-static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *weights, size_t size);
-
-static void populate_weights(size_t *size, int i, int j, int height, int width, RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE]);
+static void
+blur_pixel
+(
+    int i,
+    int j,
+    int height,
+    int width,
+    RGBTRIPLE *pixel,
+    RGBTRIPLE copy[height][width]
+);
 
 #endif

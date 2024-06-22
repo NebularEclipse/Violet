@@ -9,8 +9,23 @@
 
 #include "bmp.h"
 
-static void emboss_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, RGBTRIPLE copy[height][width]);
+#define KERNEL_SIZE 9
 
-static BYTE threshold(double x);
+static void
+emboss_pixel
+(
+    int i,
+    int j,
+    int height,
+    int width,
+    RGBTRIPLE *pixel,
+    RGBTRIPLE copy[height][width]
+);
+
+static BYTE
+threshold
+(
+    double x
+);
 
 #endif

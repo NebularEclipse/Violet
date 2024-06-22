@@ -13,60 +13,41 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            RGBTRIPLE weights[WEIGHT_SIZE];
-            size_t size;
-
-            populate_weights(&size, i, j, height, width, copy, weights);
-            blur_pixel(&image[i][j], weights, size);
+            blur_pixel(i, j, height, width, &image[i][j], copy);
         }
     }
 
     return;
 }
 
-static void blur_pixel(RGBTRIPLE *pixel, RGBTRIPLE *pixels, size_t size)
+static void blur_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, RGBTRIPLE copy[height][width])
 {
     float blue, green, red;
-
     blue = green = red = 0.5;
 
-    for (int i = 0; i < size; i++)
+    size_t size = 0;
+
+    for (int k = -1; k <= 1; k++)
     {
-        blue += pixels[i].rgbtBlue;
-        green += pixels[i].rgbtGreen;
-        red += pixels[i].rgbtRed;
+        for (int l = - 1; l <= 1; l++)
+        {
+            int ni = i + k;
+            int nj = j + l;
+
+            if (ni >= 0 && ni < height && nj >= 0 && nj < width)
+            {
+                blue += copy[ni][nj].rgbtBlue;
+                green += copy[ni][nj].rgbtGreen;
+                red += copy[ni][nj].rgbtRed;
+
+                size++;
+            }
+        }
     }
 
     pixel->rgbtBlue = blue / size;
     pixel->rgbtGreen = green / size;
     pixel->rgbtRed = red / size;
-
-    return;
-}
-
-static void populate_weights(size_t *size, int i, int j, int height, int width,
-                             RGBTRIPLE copy[height][width], RGBTRIPLE weights[WEIGHT_SIZE])
-{
-    int di[] = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
-    int dj[] = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
-
-    int k = 0;
-    int counter = 0;
-
-    for (int d = 0; d < WEIGHT_SIZE; d++)
-    {
-        int ni = i + di[d];
-        int nj = j + dj[d];
-
-        if (ni >= 0 && ni < height && nj >= 0 && nj < width)
-        {
-            weights[k] = copy[ni][nj];
-            k++;
-            counter++;
-        }
-    }
-
-    *size = counter;
 
     return;
 }

@@ -33,7 +33,7 @@ static void edges_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, R
     int di[] = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
     int dj[] = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
 
-    for (int d = 0; d < 9; d++)
+    for (int d = 0; d < KERNEL_SIZE; d++)
     {
         int ni = i + di[d];
         int nj = j + dj[d];
@@ -42,8 +42,10 @@ static void edges_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, R
         {
             x_blue += copy[ni][nj].rgbtBlue * Gx[d];
             y_blue += copy[ni][nj].rgbtBlue * Gy[d];
+
             x_green += copy[ni][nj].rgbtGreen * Gx[d];
             y_green += copy[ni][nj].rgbtGreen * Gy[d];
+            
             x_red += copy[ni][nj].rgbtRed * Gx[d];
             y_red += copy[ni][nj].rgbtRed * Gy[d];
         }

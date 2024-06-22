@@ -9,6 +9,11 @@
 
 #include "bmp.h"
 
-void swap_pixels(RGBTRIPLE *a, RGBTRIPLE *b);
+void
+swap_pixels
+(
+    RGBTRIPLE *a,
+    RGBTRIPLE *b
+);
 
 #endif

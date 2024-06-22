@@ -28,10 +28,13 @@ static void emboss_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, 
 
     int em[] = {2, 1, 0, 1, 0, -1, 0, -1, -2};
 
-    for (int d = 0; d < 9; d++)
+    int di[] = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
+    int dj[] = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
+
+    for (int d = 0; d < KERNEL_SIZE; d++)
     {
-        int ni = i + em[d];
-        int nj = j + em[d];
+        int ni = i + di[d];
+        int nj = j + dj[d];
 
         if (ni >= 0 && ni < height && nj >= 0 && nj < width)
         {
