@@ -32,8 +32,9 @@ reflect
 
 // Blur image
 void
-blur
+mean_blur
 (
+    int n,
     int height,
     int width,
     RGBTRIPLE image[height][width]
@@ -51,6 +52,15 @@ edges
 // Emboss image
 void
 emboss
+(
+    int height,
+    int width,
+    RGBTRIPLE image[height][width]
+);
+
+// Laplacian Edge Detection
+void
+laplacian_edge
 (
     int height,
     int width,

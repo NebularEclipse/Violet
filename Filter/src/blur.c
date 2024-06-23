@@ -1,10 +1,11 @@
+#include <math.h>
 #include <stddef.h>
 
 #include "../include/blur.h"
 #include "../include/copy_image.h"
 #include "../include/filter.h"
 
-void blur(int height, int width, RGBTRIPLE image[height][width])
+void mean_blur(int n, int height, int width, RGBTRIPLE image[height][width])
 {
     RGBTRIPLE copy[height][width];
     copy_image(height, width, image, copy);
@@ -13,23 +14,23 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            blur_pixel(i, j, height, width, &image[i][j], copy);
+            mean_blur_pixel(abs(n), i, j, height, width, &image[i][j], copy);
         }
     }
 
     return;
 }
 
-static void blur_pixel(int i, int j, int height, int width, RGBTRIPLE *pixel, RGBTRIPLE copy[height][width])
+static void mean_blur_pixel(int n, int i, int j, int height, int width, RGBTRIPLE *pixel, RGBTRIPLE copy[height][width])
 {
     float blue, green, red;
     blue = green = red = 0.5;
 
     size_t size = 0;
 
-    for (int k = -1; k <= 1; k++)
+    for (int k = -n; k <= n; k++)
     {
-        for (int l = - 1; l <= 1; l++)
+        for (int l = -n; l <= n; l++)
         {
             int ni = i + k;
             int nj = j + l;

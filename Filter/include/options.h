@@ -12,6 +12,7 @@
 void
 filter
 (
+    int n,
     int height,
     int width,
     RGBTRIPLE image[height][width],

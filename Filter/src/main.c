@@ -3,12 +3,16 @@
 #include <stdlib.h>
 
 #include "../include/help.h"
+#include "../include/helper.h"
 #include "../include/options.h"
 
 int main(int argc, char *argv[])
 {
     // Define allowable filters
-    char *filters = "bedghrs";
+    char *filters = "bedghlrs";
+
+    // Declare n, an optional variable
+    uint32_t n = 0;
 
     // Get filter flag and check validity
     char filter_opt = getopt(argc, argv, filters);
@@ -34,15 +38,19 @@ int main(int argc, char *argv[])
     }
 
     // Ensure proper usage
-    if (argc != optind + 2)
+    if (argc > optind + 3 || argc < optind + 2)
     {
-        printf("Usage: ./filter [flag] infile outfile\n");
+        printf("Usage: ./filter [flag] infile outfile n(optional)\n");
         return 3;
     }
 
     // Remember filenames
     char *infile = argv[optind];
     char *outfile = argv[optind + 1];
+
+    // Check if argv[optind + 2] is an integer; assign value to n if it is
+    if (argc == optind + 3 && is_int(argv[optind + 2]))
+        n = atoi(argv[optind + 2]);
 
     // Open input file
     FILE *inptr = fopen(infile, "rb");
@@ -110,7 +118,7 @@ int main(int argc, char *argv[])
 
     // Filter image
     printf("Applying filter.\n");
-    filter(height, width, image, filter_opt);
+    filter(n, height, width, image, filter_opt);
 
     printf("Writing %s\n", argv[optind + 1]);
 

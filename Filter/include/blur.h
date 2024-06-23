@@ -14,8 +14,9 @@
 #define KERNEL_SIZE 9
 
 static void
-blur_pixel
+mean_blur_pixel
 (
+    int n,
     int i,
     int j,
     int height,

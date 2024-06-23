@@ -3,12 +3,12 @@
 #include "../include/help.h"
 #include "../include/options.h"
 
-void filter(int height, int width, RGBTRIPLE image[height][width], char opt)
+void filter(int n, int height, int width, RGBTRIPLE image[height][width], char opt)
 {
     switch (opt)
     {
         case 'b':
-            blur(height, width, image);
+            mean_blur(n, height, width, image);
             break;
 
         case 'e':
@@ -21,6 +21,10 @@ void filter(int height, int width, RGBTRIPLE image[height][width], char opt)
 
         case 'g':
             grayscale(height, width, image);
+            break;
+        
+        case 'l':
+            laplacian_edge(height, width, image);
             break;
 
         case 'r':
